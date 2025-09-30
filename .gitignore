@@ -165,3 +165,7 @@ dist
 .env*
 !.env.example
 .wrangler/
+
+
+# Ignore dynamic template in public (source template is tracked)
+public/**
