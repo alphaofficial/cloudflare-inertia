@@ -167,6 +167,6 @@ dist
 .wrangler/
 
 
-# Ignore dynamic template in public (source template is tracked)
+# Ignore build output in public but keep template
 public/*
-!public/.gitkeep
+!public/template.html

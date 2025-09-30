@@ -4,8 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"copy:template": "cp template/template.html public/template.html",
-		"build": "npm run copy:template && vite build",
+		"build": "vite build",
 		"build:watch": "vite build --watch",
 		"deploy": "npm run build && wrangler deploy",
 		"dev": "concurrently \"npm run build:watch\" \"wrangler dev\"",
