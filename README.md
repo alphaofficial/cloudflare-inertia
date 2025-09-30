@@ -1,10 +1,6 @@
-# Cloudflare Workers + Inertia.js
+# Fullstack React app (Powered by Hono, Cloudflare Workers and Inertia.js)
 
-A modern full-stack application using Cloudflare Workers, Hono, Inertia.js, React, and Tailwind CSS.
-
-## Architecture Overview
-
-This project demonstrates how Inertia.js bridges server-side and client-side rendering to create a seamless single-page application experience.
+A full-stack application using Cloudflare Workers, Hono, Inertia.js, React, and Tailwind CSS. Inspired by laravel, ruby on rails
 
 ### How Inertia.js Works
 
@@ -42,29 +38,10 @@ This ensures your data is always fresh and eliminates client/server state synchr
 
 ```typescript
 // Server-side - available to all components
-return inertiaPage(
-	c,
-	'Home',
-	{
-		weather, // Page-specific data
-	},
-	{
-		title: 'Home',
-		// Shared data available to all components
-		user: await getCurrentUser(),
-		flash: getFlashMessages(),
-		csrf: generateCSRFToken(),
-	}
-);
+return inertiaPage(c, 'Home', {
+	weather, // Page-specific data
+});
 ```
-
-**Shared functions** are typically utility functions available across components:
-
-- Authentication helpers (`can()`, `cannot()`)
-- URL generation (`route()`)
-- Asset helpers (`asset()`)
-- Validation utilities
-- Date/time formatters
 
 #### 4. **Form Handling & POST Requests**
 
@@ -77,7 +54,7 @@ app.post('/users', async (c) => {
 
 	// Validate data
 	if (!name || !email) {
-		return inertiaPage(c, 'Users/Create', {
+		return render(c, 'Users/Create', {
 			errors: { name: 'Name is required', email: 'Email is required' },
 		});
 	}
@@ -124,85 +101,3 @@ export default function CreateUser() {
 - **Progressive Enhancement**: Works even if JS fails
 - **SEO Friendly**: First load is server-rendered HTML
 - **Simple Mental Model**: Just think server-side, get SPA benefits
-
-## Tech Stack
-
-- **Runtime**: Cloudflare Workers
-- **Framework**: Hono (lightweight web framework)
-- **Frontend**: React 19 + Inertia.js
-- **Styling**: Tailwind CSS
-- **Build Tool**: Vite
-- **Language**: TypeScript
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-
-### Installation
-
-```bash
-npm install
-```
-
-### Development
-
-```bash
-npm run dev
-```
-
-This starts both the Vite build watcher and Wrangler dev server.
-
-### Build
-
-```bash
-npm run build
-```
-
-Builds the client-side assets to the `public` directory.
-
-### Deploy
-
-```bash
-npm run deploy
-```
-
-Builds and deploys to Cloudflare Workers.
-
-## Project Structure
-
-```
-src/
-├── adapter/          # Custom Inertia.js adapter for Hono
-├── client/          # Client-side React application
-│   ├── pages/       # Inertia.js page components
-│   ├── app.tsx      # Client entry point
-│   └── app.css      # Global styles
-└── index.ts         # Server-side Worker code
-
-public/              # Build output and static assets
-├── app.js          # Built client bundle
-├── app.css         # Built styles
-└── template.html   # HTML template for SSR
-```
-
-## Example Routes
-
-- `/` - Home page with weather data
-- `/about` - About page
-- `/users` - Users listing
-- `/users/:id` - Individual user page
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test locally with `npm run dev`
-5. Submit a pull request
-
-## License
-
-MIT
