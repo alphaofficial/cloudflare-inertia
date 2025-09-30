@@ -168,4 +168,5 @@ dist
 
 
 # Ignore dynamic template in public (source template is tracked)
-public/**
+public/*
+!public/.gitkeep
