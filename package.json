@@ -7,7 +7,7 @@
 		"build": "vite build",
 		"build:watch": "vite build --watch",
 		"deploy": "npm run build && wrangler deploy",
-		"dev": "concurrently \"npm run build:watch\" \"wrangler dev\"",
+		"dev": "concurrently \"npm run build:watch\" \"wrangler types && wrangler dev\"",
 		"dev:server": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",

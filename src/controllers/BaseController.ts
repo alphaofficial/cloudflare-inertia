@@ -1,5 +1,5 @@
-import { PageName } from '../config/pages';
 import { InertiaAdapter } from '../adapters/InertiaHonoAdapter';
+import { PageName } from '../config/pages';
 
 export class BaseController {
 	public async render(c: any, componentName: PageName, componentProps: any = {}, documentMetadata: any = {}) {
