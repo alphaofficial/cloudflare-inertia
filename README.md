@@ -4,7 +4,7 @@ A full-stack application using Cloudflare Workers, Hono, Inertia.js, React, and 
 
 ### How Inertia.js Works
 
-Inertia.js provides a hybrid approach that combines the best of server-side rendering and single-page applications:
+[Inertia.js](https://inertiajs.com/) provides a hybrid approach that combines the best of server-side rendering and single-page applications:
 
 #### 1. **Hybrid Initial Load + XHR Navigation**
 
