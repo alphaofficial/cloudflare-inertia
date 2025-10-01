@@ -11,10 +11,13 @@
 		"dev:server": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",
+		"test:e2e": "playwright test",
+		"test:e2e:ui": "playwright test --ui",
 		"cf-typegen": "wrangler types"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"@playwright/test": "^1.55.1",
 		"@types/node": "^24.6.0",
 		"@vitejs/plugin-react": "^4.3.3",
 		"autoprefixer": "^10.4.21",
