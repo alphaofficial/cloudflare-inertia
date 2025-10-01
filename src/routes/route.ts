@@ -7,11 +7,9 @@ const route = new Hono<{
 	Variables: Variables;
 }>();
 
-const publicController = new PublicController();
-
-route.get('/', publicController.index);
-route.get('/about', publicController.about);
-route.get('/users', publicController.users);
-route.get('/users/:id', publicController.user);
+route.get('/', PublicController.index);
+route.get('/about', PublicController.about);
+route.get('/users', PublicController.users);
+route.get('/users/:id', PublicController.user);
 
 export default route;

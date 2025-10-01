@@ -4,10 +4,11 @@ import { InertiaAdapter } from '../adapters/InertiaHonoAdapter';
 export class BaseController {
 	constructor() {
 		// Auto-bind all methods to preserve 'this' context
-		const methodNames = Object.getOwnPropertyNames(Object.getPrototypeOf(this))
-			.filter(name => name !== 'constructor' && typeof this[name as keyof this] === 'function');
-		
-		methodNames.forEach(name => {
+		const methodNames = Object.getOwnPropertyNames(Object.getPrototypeOf(this)).filter(
+			(name) => name !== 'constructor' && typeof this[name as keyof this] === 'function'
+		);
+
+		methodNames.forEach((name) => {
 			this[name as keyof this] = (this[name as keyof this] as Function).bind(this);
 		});
 	}

@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import publicRoutes from './routes/public';
+import routes from './routes/route';
 import { Variables } from 'hono/types';
 
 export type Bindings = {
@@ -24,6 +24,6 @@ app.use('*', async (c, next) => {
 	return next();
 });
 
-app.route('/', publicRoutes);
+app.route('/', routes);
 
 export default app;
