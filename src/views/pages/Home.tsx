@@ -1,26 +1,21 @@
-import { Link, Head } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
+import Navigation from '../components/Navigation';
 
 interface Props {
 	message: string;
 	timestamp: string;
 	weather?: any;
+	applicationName: string;
 }
 
-export default function Home({ message, timestamp, weather }: Props) {
+export default function Home({ message, timestamp, weather, applicationName }: Props) {
 	return (
 		<>
 			<Head title="Home" />
 			<div className="max-w-4xl mx-auto p-6">
-				<nav className="mb-8 pb-4 border-b border-gray-200">
-					<Link href="/about" className="mr-6 text-gray-900 hover:underline">
-						About
-					</Link>
-					<Link href="/users" className="mr-6 text-gray-900 hover:underline">
-						Users
-					</Link>
-				</nav>
+				<Navigation />
 
-				<h1 className="text-3xl font-light mb-6">Cloudflare Workers + Inertia.js</h1>
+				<h1 className="text-3xl font-light mb-6">{applicationName}</h1>
 				<p className="mb-6 text-gray-700">{message}</p>
 
 				{weather && weather.current_weather && (

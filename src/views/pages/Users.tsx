@@ -1,4 +1,5 @@
 import { Link, Head } from '@inertiajs/react';
+import Navigation from '../components/Navigation';
 
 interface User {
 	id: number;
@@ -15,14 +16,7 @@ export default function Users({ users }: Props) {
 		<>
 			<Head title="Users" />
 			<div className="max-w-4xl mx-auto p-6">
-				<nav className="mb-8 pb-4 border-b border-gray-200">
-					<Link href="/" className="mr-6 text-gray-900 hover:underline">
-						Home
-					</Link>
-					<Link href="/about" className="mr-6 text-gray-900 hover:underline">
-						About
-					</Link>
-				</nav>
+				<Navigation />
 
 				<h1 className="text-3xl font-light mb-6">Users Directory</h1>
 

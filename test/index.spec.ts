@@ -29,6 +29,14 @@ describe('Cloudflare Inertia App', () => {
 			expect(pageData.props.message).toBe('Welcome to Cloudflare Workers with Inertia.js!');
 			expect(pageData.props.timestamp).toBeTruthy();
 			expect(typeof pageData.props.timestamp).toBe('string');
+			
+			// Test shared data
+			expect(pageData.props.auth).toBeDefined();
+			expect(pageData.props.auth.user).toBeNull();
+			expect(pageData.props.flash).toBeDefined();
+			expect(pageData.props.flash.success).toBeNull();
+			expect(pageData.props.flash.error).toBeNull();
+			expect(pageData.props.appName).toBe('Cloudflare Inertia App');
 		});
 
 		it('/ responds with HTML (integration style)', async () => {

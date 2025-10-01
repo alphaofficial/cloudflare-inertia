@@ -1,11 +1,8 @@
-import { InertiaAdapter } from '../adapters/InertiaHonoAdapter';
 import { PageName } from '../config/pages';
 
 export class BaseController {
 	public async render(c: any, componentName: PageName, componentProps: any = {}, documentMetadata: any = {}) {
-		const inertia = new InertiaAdapter({
-			version: '1',
-		});
+		const inertia = c.get('inertia');
 		const result = inertia.render(c, componentName, componentProps);
 
 		if (result instanceof Response) {
