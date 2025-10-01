@@ -1,3 +1,5 @@
+import { Context } from 'hono';
+
 export class InertiaAdapter {
 	private version: string;
 
@@ -5,24 +7,21 @@ export class InertiaAdapter {
 		this.version = options.version;
 	}
 
-	render(c: any, component: string, props: any = {}) {
-		const isInertiaRequest = c.req.header("X-Inertia") === "true";
+	render(c: Context, component: string, props: any = {}) {
+		const isInertiaRequest = c.req.header('X-Inertia') === 'true';
 
 		if (isInertiaRequest) {
-			// Handle Inertia XHR requests
-			const currentVersion = c.req.header("X-Inertia-Version");
+			const currentVersion = c.req.header('X-Inertia-Version');
 
 			if (currentVersion !== this.version) {
-				// Force a full page reload if versions don't match
-				return new Response("", {
+				return new Response('', {
 					status: 409,
 					headers: {
-						"X-Inertia-Location": c.req.url,
+						'X-Inertia-Location': c.req.url,
 					},
 				});
 			}
 
-			// Return JSON response for Inertia
 			return c.json(
 				{
 					component,
@@ -32,14 +31,13 @@ export class InertiaAdapter {
 				},
 				{
 					headers: {
-						Vary: "Accept",
-						"X-Inertia": "true",
+						Vary: 'Accept',
+						'X-Inertia': 'true',
 					},
-				},
+				}
 			);
 		}
 
-		// First page load - return page data for template rendering
 		return {
 			component,
 			props,
