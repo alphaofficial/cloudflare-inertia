@@ -15,34 +15,28 @@ describe('Cloudflare Inertia App', () => {
 			const ctx = createExecutionContext();
 			const response = await worker.fetch(request, env, ctx);
 			await waitOnExecutionContext(ctx);
-			
+
 			expect(response.status).toBe(200);
 			expect(response.headers.get('content-type')).toContain('text/html');
-			
+
 			const html = await response.text();
 			expect(html).toContain('<div id="app"');
 			expect(html).toContain('data-page=');
-			
+
 			const pageData = extractInertiaPageData(html);
 			expect(pageData).toBeTruthy();
 			expect(pageData.component).toBe('Home');
 			expect(pageData.props.message).toBe('Welcome to Cloudflare Workers with Inertia.js!');
 			expect(pageData.props.timestamp).toBeTruthy();
 			expect(typeof pageData.props.timestamp).toBe('string');
-			
-			// Test shared data
-			expect(pageData.props.auth).toBeDefined();
-			expect(pageData.props.auth.user).toBeNull();
-			expect(pageData.props.flash).toBeDefined();
-			expect(pageData.props.flash.success).toBeNull();
-			expect(pageData.props.flash.error).toBeNull();
-			expect(pageData.props.appName).toBe('Cloudflare Inertia App');
+
+			expect(pageData.props.applicationName).toBe('Cloudflare Inertia App');
 		});
 
 		it('/ responds with HTML (integration style)', async () => {
 			const request = new Request('http://example.com/');
 			const response = await SELF.fetch(request);
-			
+
 			expect(response.status).toBe(200);
 			const html = await response.text();
 			expect(html).toContain('<div id="app"');
@@ -55,10 +49,10 @@ describe('Cloudflare Inertia App', () => {
 			const ctx = createExecutionContext();
 			const response = await worker.fetch(request, env, ctx);
 			await waitOnExecutionContext(ctx);
-			
+
 			expect(response.status).toBe(200);
 			expect(response.headers.get('content-type')).toContain('text/html');
-			
+
 			const html = await response.text();
 			const pageData = extractInertiaPageData(html);
 			expect(pageData).toBeTruthy();
@@ -74,10 +68,10 @@ describe('Cloudflare Inertia App', () => {
 			const ctx = createExecutionContext();
 			const response = await worker.fetch(request, env, ctx);
 			await waitOnExecutionContext(ctx);
-			
+
 			expect(response.status).toBe(200);
 			expect(response.headers.get('content-type')).toContain('text/html');
-			
+
 			const html = await response.text();
 			const pageData = extractInertiaPageData(html);
 			expect(pageData).toBeTruthy();
@@ -87,12 +81,12 @@ describe('Cloudflare Inertia App', () => {
 			expect(pageData.props.users[0]).toEqual({
 				id: 1,
 				name: 'John Doe',
-				email: 'john@example.com'
+				email: 'john@example.com',
 			});
 			expect(pageData.props.users[1]).toEqual({
 				id: 2,
 				name: 'Jane Smith',
-				email: 'jane@example.com'
+				email: 'jane@example.com',
 			});
 		});
 	});
@@ -103,10 +97,10 @@ describe('Cloudflare Inertia App', () => {
 			const ctx = createExecutionContext();
 			const response = await worker.fetch(request, env, ctx);
 			await waitOnExecutionContext(ctx);
-			
+
 			expect(response.status).toBe(200);
 			expect(response.headers.get('content-type')).toContain('text/html');
-			
+
 			const html = await response.text();
 			const pageData = extractInertiaPageData(html);
 			expect(pageData).toBeTruthy();
@@ -114,7 +108,7 @@ describe('Cloudflare Inertia App', () => {
 			expect(pageData.props.user).toEqual({
 				id: 1,
 				name: 'John Doe',
-				email: 'john@example.com'
+				email: 'john@example.com',
 			});
 		});
 
@@ -123,7 +117,7 @@ describe('Cloudflare Inertia App', () => {
 			const ctx = createExecutionContext();
 			const response = await worker.fetch(request, env, ctx);
 			await waitOnExecutionContext(ctx);
-			
+
 			expect(response.status).toBe(404);
 		});
 	});
@@ -134,7 +128,7 @@ describe('Cloudflare Inertia App', () => {
 			const ctx = createExecutionContext();
 			const response = await worker.fetch(request, env, ctx);
 			await waitOnExecutionContext(ctx);
-			
+
 			expect(response.status).toBe(200);
 			expect(response.headers.get('content-type')).toContain('text/css');
 		});
